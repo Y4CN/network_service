@@ -31,6 +31,7 @@ Future<void> main() async {
   await setupNetworkModule(
     tokenManager: YourTokenManagerImplementation(),
     publicEndpoints: publicEndpoints,
+    baseUrl: 'https://api.example.com/v1',
   );
   
   runApp(MyApp());
