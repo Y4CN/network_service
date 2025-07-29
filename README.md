@@ -40,17 +40,19 @@ dependencies:
   dio: ^5.4.0
   get_it: ^7.6.4
   shared_preferences: ^2.2.2
+```
 
 سپس دستور زیر را اجرا کنید:
 
-bash
+```bash
 flutter pub get
+```
 
 ## 🚀 شروع سریع
 
 ### مرحله 1: Token Manager پیاده‌سازی کنید
 
-dart
+```dart
 import 'package:network_service/network_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -89,10 +91,11 @@ refreshToken: _prefs.getString('refresh_token'),
 );
   }
 }
+```
 
 ### مرحله 2: Network Module راه‌اندازی کنید
 
-dart
+```dart
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:network_service/network_service.dart';
@@ -112,10 +115,11 @@ publicEndpoints: ['/login', '/register', '/forgot-password'],
   
   runApp(MyApp());
 }
+```
 
 ### مرحله 3: استفاده در Service Layer
 
-dart
+```dart
 import 'package:network_service/network_service.dart';
 
 class UserService {
@@ -142,12 +146,13 @@ queryParams: {'q': query, 'limit': 20},
 return response.data;
   }
 }
+```
 
 ## 🔐 Token Management
 
 ### مدیریت خودکار Authentication
 
-dart
+```dart
 class AuthService {
   final NetworkService _networkService = getIt<NetworkService>();
   final ITokenManager _tokenManager = getIt<ITokenManager>();
@@ -176,10 +181,11 @@ await _tokenManager.clearStorage();
 return await _tokenManager.isTokenStored();
   }
 }
+```
 
 ### Token امن با Secure Storage
 
-dart
+```dart
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureTokenManager implements ITokenManager {
@@ -212,12 +218,13 @@ return token != null;
 await _storage.delete(key: _tokenKey);
   }
 }
+```
 
 ## 🌐 HTTP Methods
 
 ### GET Request
 
-dart
+```dart
 // درخواست ساده
 final users = await _networkService.get('/users');
 
@@ -251,10 +258,11 @@ await _networkService.post('/upload-data',
 print('آپلود: ${(sent / total * 100).toStringAsFixed(1)}%');
   },
 );
+```
 
 ### PUT و PATCH
 
-dart
+```dart
 // بروزرسانی کامل
 await _networkService.put('/users/123', data: updatedUserData);
 
@@ -271,12 +279,13 @@ await _networkService.delete('/users/123', queryParams: {
   'confirm': 'true',
   'reason': 'اکانت غیرفعال شده',
 });
+```
 
 ## 📤 File Upload
 
 ### آپلود تک فایل
 
-dart
+```dart
 import 'package:dio/dio.dart';
 import 'dart:io';
 
@@ -294,10 +303,11 @@ print('آپلود تصویر: $progress%');
 },
   );
 }
+```
 
 ### آپلود چند فایل
 
-dart
+```dart
 Future<void> uploadDocuments(List<File> documents) async {
   final multipartFiles = <MultipartFile>[];
   
@@ -317,12 +327,13 @@ data: {
 },
   );
 }
+```
 
 ## 🚦 Error Handling
 
 ### Custom Error Handler
 
-dart
+```dart
 import 'package:network_service/network_service.dart';
 
 class MyErrorHandler implements ErrorHandler {
@@ -370,21 +381,23 @@ print('خطای سرور');
 print('خطا: $message');
   }
 }
+```
 
 ### استفاده از Error Handler
 
-dart
+```dart
 await setupNetworkModule(
   tokenManager: tokenManager,
   errorHandler: MyErrorHandler(), // Custom Error Handler
   publicEndpoints: ['/login', '/register'],
 );
+```
 
 ## 🎯 Dependency Injection
 
 ### تنظیمات پیشرفته
 
-dart
+```dart
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:network_service/network_service.dart';
@@ -417,10 +430,11 @@ publicEndpoints: [
   getIt.registerLazySingleton<AuthService>(() => AuthService());
   getIt.registerLazySingleton<UserService>(() => UserService());
 }
+```
 
 ### استفاده در Widget
 
-dart
+```dart
 class UserProfileScreen extends StatefulWidget {
   @override
   _UserProfileScreenState createState() => _UserProfileScreenState();
@@ -473,12 +487,13 @@ Text('ایمیل: ${_user!['email']}'),
 );
   }
 }
+```
 
 ## 💡 مثال‌های پیشرفته
 
 ### Retry Mechanism
 
-dart
+```dart
 class RetryableNetworkService {
   final NetworkService _networkService = getIt<NetworkService>();
   
@@ -510,10 +525,11 @@ final retryService = RetryableNetworkService();
 final data = await retryService.withRetry(() => 
   _networkService.get('/unstable-endpoint')
 );
+```
 
 ### Progress Tracking
 
-dart
+```dart
 class ProgressTracker {
   final ValueNotifier<double> uploadProgress = ValueNotifier(0.0);
   final ValueNotifier<double> downloadProgress = ValueNotifier(0.0);
@@ -537,10 +553,11 @@ ValueListenableBuilder<double>(
 return LinearProgressIndicator(value: progress);
   },
 )
+```
 
 ### Cancel Token
 
-dart
+```dart
 import 'package:dio/dio.dart';
 
 class CancellableRequest {
@@ -566,29 +583,32 @@ rethrow;
 _cancelToken?.cancel('درخواست توسط کاربر لغو شد');
   }
 }
+```
 
 ## 🚨 نکات مهم
 
 ### ✅ بهترین روش‌ها
 
 **Dependency Injection:**
-dart
+```dart
 // ✅ درست - Lazy Singleton
 getIt.registerLazySingleton<UserService>(() => UserService());
 
 // ❌ اشتباه - Register Singleton برای همه چیز
 getIt.registerSingleton<UserService>(UserService());
+```
 
 **Token Storage:**
-dart
+```dart
 // ✅ درست - Secure Storage
 await FlutterSecureStorage().write(key: 'token', value: token);
 
 // ❌ اشتباه - SharedPreferences برای Token
 prefs.setString('token', token);
+```
 
 **Error Handling:**
-dart
+```dart
 // ✅ درست - Try-Catch با مدیریت خطا
 try {
   final result = await _networkService.get('/endpoint');
@@ -601,6 +621,7 @@ try {
 // ❌ اشتباه - بدون مدیریت خطا
 final result = await _networkService.get('/endpoint');
 return result;
+```
 
 ### ⚠️ اشتباهات رایج
 
@@ -623,7 +644,7 @@ return result;
 
 ## 🧪 Testing
 
-dart
+```dart
 import 'package:mockito/mockito.dart';
 import 'package:network_service/network_service.dart';
 
@@ -652,6 +673,7 @@ expect(result['data']['name'], 'Test User');
 verify(mockNetworkService.get('/user/profile')).called(1);
   });
 }
+```
 
 ## 📄 مجوز
 
