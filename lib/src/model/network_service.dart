@@ -1,4 +1,3 @@
-// lib/src/network_service.dart
 import 'package:dio/dio.dart';
 import 'package:network_service/src/model/api_response.dart';
 import 'http_request_type.dart';
