@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:network_service/src/dio_network_manager.dart';
-import 'package:network_service/src/network_service.dart';
-import 'package:network_service/src/token_manager.dart';
+import 'package:network_service/src/model/network_service.dart';
+import 'package:network_service/src/model/token_manager.dart';
 
 import 'errors/errors.dart';
 

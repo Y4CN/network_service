@@ -15,7 +15,7 @@ import 'package:dio/src/transformer.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:network_service/src/errors/error_handler.dart' as _i12;
 import 'package:network_service/src/token.dart' as _i11;
-import 'package:network_service/src/token_manager.dart' as _i10;
+import 'package:network_service/src/model/token_manager.dart' as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

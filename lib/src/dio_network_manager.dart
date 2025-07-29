@@ -1,10 +1,10 @@
 // lib/src/dio_network_manager.dart
 import 'package:dio/dio.dart';
 import 'package:network_service/src/errors/api_error_type.dart';
-import 'package:network_service/src/http_request_type.dart';
+import 'package:network_service/src/model/http_request_type.dart';
 import 'package:network_service/src/model/api_response.dart';
-import 'package:network_service/src/network_service.dart';
-import 'package:network_service/src/token_manager.dart';
+import 'package:network_service/src/model/network_service.dart';
+import 'package:network_service/src/model/token_manager.dart';
 import 'errors/error_handler.dart';
 
 class DioNetworkManager implements NetworkService {

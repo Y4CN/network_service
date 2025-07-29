@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:network_service/src/dio_network_manager.dart';
 import 'package:network_service/src/errors/errors.dart';
 import 'package:network_service/src/token.dart';
-import 'package:network_service/src/token_manager.dart';
+import 'package:network_service/src/model/token_manager.dart';
 
 import 'dio_network_manager_test.mocks.dart';
 
