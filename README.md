@@ -240,10 +240,11 @@ final response = await _networkService.get('/protected-endpoint', headers: {
   'X-API-Version': '2.0',
   'Accept-Language': 'fa-IR',
 });
+```
 
 ### POST Request
 
-dart
+```dart
 // ایجاد کاربر جدید
 final newUser = await _networkService.post('/users', data: {
   'name': 'علی احمدی',
@@ -268,10 +269,11 @@ await _networkService.put('/users/123', data: updatedUserData);
 
 // بروزرسانی جزئی
 await _networkService.patch('/users/123', data: {'status': 'inactive'});
+```
 
 ### DELETE
 
-dart
+```dart
 await _networkService.delete('/users/123');
 
 // با تایید
@@ -684,27 +686,3 @@ verify(mockNetworkService.get('/user/profile')).called(1);
 **ساخته شده با ❤️ برای جامعه Flutter**
 
 اگر این پکیج برای شما مفید بود، لطفاً ⭐ ستاره دهید!
-
-
-این README به فرمت استاندارد Markdown نوشته شده و شامل:
-
-✅ **ساختار صحیح .md:**
-- Headers با `#`
-- Code blocks با triple backticks
-- Lists با `-` و `*`
-- Links با `[text](url)`
-- Emphasis با `**bold**`
-
-✅ **محتوای جامع:**
-- راهنمای نصب کامل
-- مثال‌های عملی
-- توضیح همه ویژگی‌ها
-- بهترین روش‌ها
-- نکات امنیتی
-- راهنمای تست
-
-✅ **طراحی حرفه‌ای:**
-- فهرست مطالب
-- ساختار منطقی
-- کد‌های قابل کپی
-- توضیحات فارسی
